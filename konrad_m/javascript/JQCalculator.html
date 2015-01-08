@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="JQCalculator.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script>
+
+      $(document).ready(function(){
+
+        var should_clear = false;
+
+        // This handles most of the input buttons...numbers and operators.
+        $( ".input" ).click( function() {
+          var num = $(this).html();
+
+          if ( parseInt(num) && should_clear ) {
+            $( "#display" ).html( '' );
+          }
+
+          $("#display").append( num );
+
+          should_clear = false;
+        });
+
+        // This handles the clear button
+        $( "#clear" ).click( function() {
+          $( "#display" ).html( '0' );
+          should_clear = true;
+        });
+
+        // This handles the = button
+        $( "#evaluate" ).click( function() {
+
+          var problem = $( "#display" ).html();
+          var answer = eval(problem);
+
+          $( "#display" ).html( answer );
+
+          should_clear = true;
+        })
+
+        // This will add 0 to the diplay upon page load
+        $('#clear').click();
+
+        $('[data-toggle="popover"]').popover();
+
+      });
+
+
+    </script>
+
+    <title>jQuery Calculator</title>
+</head>
+<body>
+
+    
+      <button id='main_title' type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Malovich Malovich Malovich, Malovich Malovich. Malovich!! Malovich :(">
+        <h1>jQuery Calculator</h1>
+      </button>
+    
+
+    <div id='container'>
+      <table id='keypad'>
+        <tr>
+          <td colspan='4'>
+            <div class="panel panel-default">
+              <div class="panel-heading"><strong>I calculate calculations and stuff.</strong></div>
+              <div class="panel-body" id='display'>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="input btn btn-default">1</td>
+          <td class="input btn btn-default">2</td> 
+          <td class="input btn btn-default">3</td>
+          <td class="input btn btn-default">+</td>
+        </tr>
+        <tr>
+          <td class="input btn btn-default">4</td>
+          <td class="input btn btn-default">5</td> 
+          <td class="input btn btn-default">6</td>
+          <td class="input btn btn-default">-</td>
+        </tr>
+        <tr>
+          <td class="input btn btn-default">7</td>
+          <td class="input btn btn-default">8</td> 
+          <td class="input btn btn-default">9</td>
+          <td class="input btn btn-default">*</td>
+        </tr>
+        <tr>
+          <td id='clear' class="btn btn-default">C</td>
+          <td class="input btn btn-default">0</td> 
+          <td id='evaluate' class="btn btn-default">=</td>
+          <td class="input btn btn-default">/</td>
+        </tr>
+      </table>
+    </div>
+    
+</body>
+</html>
